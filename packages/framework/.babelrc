@@ -1,0 +1,58 @@
+{
+  "presets": [
+    "@babel/preset-react",
+    ["@babel/preset-env", {
+      "modules": "commonjs",
+      "targets": {
+        "chrome": 48,
+        "ie": 9,
+        "browsers": [
+          "> 1%",
+          "last 5 versions"
+        ]
+      }
+    }]
+  ],
+  "plugins": [
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-object-rest-spread",
+    "@babel/plugin-proposal-async-generator-functions",
+    ["@babel/plugin-transform-runtime", {
+      "absoluteRuntime": false,
+      "corejs": 2,
+      "helpers": true,
+      "regenerator": true,
+      "useESModules": false
+    }]
+  ],
+  "env": {
+    "test": {
+      "presets": [
+        "@babel/preset-react",
+        ["@babel/preset-env", {
+          "modules": "commonjs",
+          "targets": {
+            "chrome": 48,
+            "ie": 9,
+            "browsers": [
+              "> 1%",
+              "last 5 versions"
+            ]
+          }
+        }]
+      ],
+      "plugins": [
+        "@babel/plugin-proposal-class-properties",
+        "@babel/plugin-proposal-object-rest-spread",
+        ["@babel/plugin-transform-runtime", {
+          "absoluteRuntime": false,
+          "corejs": 2,
+          "helpers": true,
+          "regenerator": true,
+          "useESModules": false
+        }]
+      ]
+    }
+  }
+}
