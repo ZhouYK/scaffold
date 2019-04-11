@@ -7,7 +7,9 @@ const fs = require('fs');
 const chalk = require('chalk');
 const cp = require('child_process');
 
-const version = require('./package').version;
+const pageJs = 'page-javascript';
+const npm = 'npm';
+
 const deleteFolder = (filePath) => {
   if (fs.existsSync(filePath)) {
     const files = fs.readdirSync(filePath);
@@ -23,6 +25,23 @@ const deleteFolder = (filePath) => {
     fs.rmdirSync(filePath);
   }
 };
+const createFolder = (answer, cb) => {
+  const p = path.resolve(process.cwd(), `./${answer.folder}`);
+  const flag = fs.existsSync(p);
+  if (!flag) {
+    cb(p);
+  } else {
+    const pStatus = fs.readdirSync(p);
+    if (pStatus.length === 0) {
+      fs.rmdirSync(p);
+      cb(p);
+    } else {
+      console.log(chalk.red(`folder：${answer.folder} is not empty!`));
+    }
+  }
+}
+
+const version = require('./package').version;
 program
   .version(version, '-v, --version')
   .usage('[options]')
@@ -33,6 +52,7 @@ program
 if (program.scaffoldList) {
   const text = `Scaffold：
   1, page(js)
+  2, npm
   `;
   console.log(text)
 } else if (program.selectScaffold) {
@@ -42,40 +62,73 @@ if (program.scaffoldList) {
     message: 'scaffold list:',
     choices: [{
       name: 'page(js)',
-      value: 'page-javascript',
-      short: 'page-javascript',
+      value: pageJs,
+      short: pageJs,
+    }, {
+      name: npm,
+      value: npm,
+      short: npm,
     }]
   }]).then(choice => {
     // Use user feedback for... whatever!!
-    inquirer.prompt({
-      type: 'input',
-      name: 'folder',
-      message: 'folder name:'
-    }).then(answer => {
-      const p = path.resolve(process.cwd(), `./${answer.folder}`);
-      const flag = fs.existsSync(p);
-      if (!flag) {
-        fs.mkdirSync(p);
-        console.log(chalk.green('Digging...'));
-        process.chdir(p);
-        cp.execSync('npm i @zhouyk/javascript-web-framework', {
-          stdio: 'inherit'
+    switch (choice.scaffold) {
+      case pageJs:
+        inquirer.prompt({
+          type: 'input',
+          name: 'folder',
+          message: 'folder name:'
+        }).then(answer => {
+          createFolder(answer, (p) => {
+            fs.mkdirSync(p);
+            console.log(chalk.green('Digging...'));
+            process.chdir(p);
+            cp.execSync('npm i @zhouyk/javascript-web-framework', {
+              stdio: 'inherit'
+            });
+            ncp(path.join(p, 'node_modules/@zhouyk/javascript-web-framework'), p, function (err) {
+              if (err) {
+                return console.error(chalk.red(err));
+              }
+              process.chdir(p);
+              //deleteFolder('./node_modules/@zhouyk');
+              cp.execSync('npm i', {
+                stdio: 'inherit'
+              });
+              console.log(chalk.green('Done! Enjoy your work!'));
+            })
+          })
         });
-        ncp(path.join(p, 'node_modules/@zhouyk/javascript-web-framework'), p, function (err) {
-          if (err) {
-            return console.error(chalk.red(err));
-          }
-          process.chdir(p);
-          //deleteFolder('./node_modules/@zhouyk');
-          cp.execSync('npm i', {
-            stdio: 'inherit'
+      break;
+      case npm:
+        inquirer.prompt({
+          type: 'input',
+          name: 'folder',
+          message: 'folder name:'
+        }).then(answer => {
+          createFolder(answer, (p) => {
+            fs.mkdirSync(p);
+            console.log(chalk.green('Digging...'));
+            process.chdir(p);
+            cp.execSync('npm i @zhouyk/npm-scaffold', {
+              stdio: 'inherit'
+            });
+            ncp(path.join(p, 'node_modules/@zhouyk/npm-scaffold'), p, function (err) {
+              if (err) {
+                return console.error(chalk.red(err));
+              }
+              process.chdir(p);
+              cp.execSync('npm i', {
+                stdio: 'inherit'
+              });
+              cp.execSync('npm init', {
+                stdio: 'inherit'
+              });
+              console.log(chalk.green('Done! Enjoy your work!'));
+            })
           });
-          console.log(chalk.green('Done! Enjoy your work!'));
-        })
-      } else {
-        console.log(chalk.red(`folder：${answer.folder} already exists`));
-      }
-    })
+        });
+    }
+
   });
 } else {
   program.outputHelp();

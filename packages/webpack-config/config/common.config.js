@@ -48,7 +48,7 @@ const config = {
     //  $tools: path.resolve(pwd, './client/tools/'),
     //  $utils: path.resolve(pwd, './client/utils/'),
     //},
-    mainFiles: ['index.web', 'index'],
+    mainFiles: ['index.js.web', 'index.js'],
     // 不要设置，会导致包找不到
     //modules: [
     //  path.resolve(pwd, './node_modules'),
