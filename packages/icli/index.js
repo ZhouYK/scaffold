@@ -82,7 +82,7 @@ if (program.scaffoldList) {
             fs.mkdirSync(p);
             console.log(chalk.green('Digging...'));
             process.chdir(p);
-            cp.execSync('npm i @zhouyk/javascript-web-framework', {
+            cp.execSync('npm i @zhouyk/javascript-web-framework@latest', {
               stdio: 'inherit'
             });
             ncp(path.join(p, 'node_modules/@zhouyk/javascript-web-framework'), p, function (err) {
@@ -109,7 +109,7 @@ if (program.scaffoldList) {
             fs.mkdirSync(p);
             console.log(chalk.green('Digging...'));
             process.chdir(p);
-            cp.execSync('npm i @zhouyk/npm-scaffold', {
+            cp.execSync('npm i @zhouyk/npm-scaffold@latest', {
               stdio: 'inherit'
             });
             ncp(path.join(p, 'node_modules/@zhouyk/npm-scaffold'), p, function (err) {

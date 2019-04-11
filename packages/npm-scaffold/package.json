@@ -30,7 +30,13 @@
     "dist/es",
     "dist/cj",
     "dist/umd",
-    "package.json"
+    "package.json",
+    "example",
+    ".babelrc",
+    ".gitignore",
+    ".npmrc",
+    "webpack.config.js",
+    "webpack.dev.config.js"
   ],
   "publishConfig": {
     "access": "public"
