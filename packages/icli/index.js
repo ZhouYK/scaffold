@@ -81,17 +81,15 @@ if (program.scaffoldList) {
           createFolder(answer, (p) => {
             fs.mkdirSync(p);
             console.log(chalk.green('Digging...'));
-            process.chdir(p);
-            cp.execSync('npm i @zhouyk/javascript-web-framework@latest', {
+            cp.execSync(`npm i --prefix ${p} @zhouyk/javascript-web-framework@latest`, {
               stdio: 'inherit'
             });
             ncp(path.join(p, 'node_modules/@zhouyk/javascript-web-framework'), p, function (err) {
               if (err) {
                 return console.error(chalk.red(err));
               }
-              process.chdir(p);
               //deleteFolder('./node_modules/@zhouyk');
-              cp.execSync('npm i', {
+              cp.execSync(`npm i --prefix ${p}`, {
                 stdio: 'inherit'
               });
               console.log(chalk.green('Done! Enjoy your work!'));
@@ -108,16 +106,14 @@ if (program.scaffoldList) {
           createFolder(answer, (p) => {
             fs.mkdirSync(p);
             console.log(chalk.green('Digging...'));
-            process.chdir(p);
-            cp.execSync('npm i @zhouyk/npm-scaffold@latest', {
+            cp.execSync(`npm i --prefix ${p} @zhouyk/npm-scaffold@latest`, {
               stdio: 'inherit'
             });
             ncp(path.join(p, 'node_modules/@zhouyk/npm-scaffold'), p, function (err) {
               if (err) {
                 return console.error(chalk.red(err));
               }
-              process.chdir(p);
-              cp.execSync('npm i', {
+              cp.execSync(`npm i --prefix ${p}`, {
                 stdio: 'inherit'
               });
               cp.execSync('npm init', {
