@@ -1,6 +1,6 @@
 {
   "name": "@zhouyk/webpack-config",
-  "version": "0.2.4-alpha.1",
+  "version": "0.2.4",
   "description": "webpack config",
   "main": "./index.js",
   "bin": {

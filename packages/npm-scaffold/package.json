@@ -1,6 +1,6 @@
 {
   "name": "@zhouyk/npm-scaffold",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "your project description",
   "main": "dist/umd/index.js",
   "scripts": {
