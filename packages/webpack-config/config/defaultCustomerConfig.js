@@ -17,7 +17,7 @@ module.exports = {
     port: '8888',
     disableHostCheck: true,
     historyApiFallback: true,
-    stats: 'minimal',
+    stats: 'normal',
     compress: true,
     inline: true,
     publicPath: publicPaths.local

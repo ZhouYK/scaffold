@@ -128,7 +128,7 @@ const getConfig = (config, env) => {
       }),
       new HtmlWebpackPlugin({
         template: './html/index.html',
-        filename: 'index.js.html',
+        filename: 'index.html',
         version:  `/sw/forsw.gif?${swVersion}`,
         title,
         inject:   true,
