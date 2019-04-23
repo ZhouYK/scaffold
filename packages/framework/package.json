@@ -1,6 +1,6 @@
 {
   "name": "@zhouyk/javascript-web-framework",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "前端web脚手架",
   "sideEffects": [
     "*.css",
@@ -68,7 +68,7 @@
   "devDependencies": {
     "@zhouyk/eslint-config": "^0.0.4",
     "@zhouyk/stylelint-config": "^0.0.4",
-    "@zhouyk/webpack-config": "^0.2.4",
+    "@zhouyk/webpack-config": "^0.2.5",
     "babel-jest": "~23.6.0",
     "husky": "~1.0.0",
     "jest": "~23.6.0",
